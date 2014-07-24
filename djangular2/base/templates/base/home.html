@@ -1,0 +1,39 @@
+{% extends "_layouts/base.html" %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+{% block js %}
+{{block.super}}
+<script src="/static/js/login/login.js"></script>
+<script src="/static/js/todo/todo.js"></script>
+
+<script>
+    angular.module('myapp').config(['$routeProvider', function($routeProvider) {
+      $routeProvider.
+        when('/login', {templateUrl: '/static/js/login/login.html', controller: 'LoginCtrl'}).
+        when('/todo', {templateUrl: 'static/js/todo/todo.html', controller: 'TodoCtrl'}).
+        otherwise({redirectTo: '/login'});
+    }]);
+</script>
+{% endblock js %}
+
+{% block page_title %}Your Site - Home{% endblock %}
+{% block page_class %}home-page{% endblock %}
+
+
+{% block content %}
+
+<div ng-app="myapp">
+  <div ng-view></div>
+</div>
+
+{% endblock %}
