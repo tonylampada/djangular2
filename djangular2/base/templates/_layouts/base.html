@@ -79,6 +79,12 @@
   <!-- scripts concatenated and minified via django-compressor -->
   {% compress js %}
   {% block js %}
+  <script>
+      if(!window.DJ2){
+          window.DJ2 = {};
+      }
+      DJ2.csrf_token = '{{csrf_token}}';
+  </script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/ajax.js' %}"></script>
   {% endblock js %}

@@ -2,6 +2,7 @@
     //Atenção pro detalhe do array no lugar da função!
     angular.module('modajax', []).config(function($httpProvider){
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        $httpProvider.defaults.headers.post['X-CSRFToken'] = DJ2.csrf_token;
     }).factory('Ajax', ['$http', function($http){
         return {
             get: function(url, params){
@@ -21,8 +22,7 @@
                 return $http({
                     method: 'POST',
                     url: url,
-                    data: $.param(params),
-                    config: post_config
+                    data: $.param(params)
                 });
             }
         };
