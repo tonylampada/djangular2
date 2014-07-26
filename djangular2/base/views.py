@@ -5,6 +5,7 @@ from django.http.response import HttpResponse
 from django.contrib import auth
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from base.decorators import login_required_ajax
 
 
 def home(request):
@@ -34,6 +35,7 @@ def logout(request):
     return HttpResponse("")
 
 
+@login_required_ajax
 def baba(request):
     print('jujuba: %s' % request.GET.get('jujuba'))
     resposta = {
