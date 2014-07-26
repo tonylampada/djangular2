@@ -1,1 +1,1 @@
-angular.module('myapp', ['ngRoute', 'modajax']);
+angular.module('myapp', ['ngRoute', 'ngCookies', 'modajax']);

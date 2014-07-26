@@ -1,13 +1,12 @@
 (function(){
     //Atenção pro detalhe do array no lugar da função!
-    angular.module('modajax', [])
+    angular.module('modajax', ['ngCookies'])
 
     angular.module('modajax').config(function($httpProvider){
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        $httpProvider.defaults.headers.post['X-CSRFToken'] = DJ2.csrf_token;
-    })
+    });
 
-    angular.module('modajax').factory('Ajax', ['$http', function($http){
+    angular.module('modajax').factory('Ajax', ['$http', '$cookies', function($http, $cookies){
         return {
             get: function(url, params){
                 if(!params){
@@ -23,6 +22,7 @@
                 if(!params){
                     params = {};
                 }
+                $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
                 return $http({
                     method: 'POST',
                     url: url,

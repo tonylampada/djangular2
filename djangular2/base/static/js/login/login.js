@@ -1,10 +1,18 @@
-angular.module('myapp').controller('LoginCtrl', function($scope, Ajax){
+angular.module('myapp').controller('LoginCtrl', function($scope, Ajax, $cookies){
 
 	$scope.login = function(){
 		Ajax.post('/login', {username:$scope.username, password:$scope.password}).success(function(result){
-			console.log('ok');
-		}).error(function(err){
-			console.error('erro no login: '+err);
+			console.log('entrou');
+		}).error(function(err, status){
+			console.error('erro no login: '+err+", "+status);
+		});
+	};
+
+	$scope.logout = function(){
+		Ajax.post('/logout').success(function(result, status, headers){
+			console.log('Saiu');
+		}).error(function(err, status){
+			console.error('erro no logout: '+err+", "+status);
 		});
 	};
 
